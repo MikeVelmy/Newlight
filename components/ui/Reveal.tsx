@@ -6,19 +6,15 @@ type RevealProps = {
   children: ReactNode;
   as?: ElementType;
   className?: string;
-  /** Stagger delay in ms — used sparingly for small sequences. */
-  delay?: number;
-  id?: string;
+  delayClass?: "reveal-delay-1" | "reveal-delay-2" | "reveal-delay-3" | "reveal-delay-4";
 };
 
 /**
- * Progressive-enhancement scroll reveal. Content is fully visible on the server
- * and without JS (no `.reveal` class is emitted). Only after mount — once we know
- * IntersectionObserver is available — do we opt the element into the animated
- * hidden→visible transition. This guarantees the page is never blank if JS fails
- * or is slow, while still giving a considered entrance on scroll.
+ * Progressive-enhancement scroll reveal: fully visible on the server / without
+ * JS, and only opts into the hidden→visible transition once mounted, so a
+ * slow or failed IntersectionObserver never leaves content permanently hidden.
  */
-export function Reveal({ children, as, className = "", delay = 0, id }: RevealProps) {
+export function Reveal({ children, as, className = "", delayClass }: RevealProps) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement | null>(null);
   const [enhance, setEnhance] = useState(false);
@@ -28,7 +24,6 @@ export function Reveal({ children, as, className = "", delay = 0, id }: RevealPr
     const el = ref.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
 
-    // If already in view on mount, skip the hide entirely (no flash).
     const rect = el.getBoundingClientRect();
     const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
     if (inView) {
@@ -53,15 +48,12 @@ export function Reveal({ children, as, className = "", delay = 0, id }: RevealPr
     return () => io.disconnect();
   }, []);
 
-  const cls = enhance ? `reveal ${visible ? "is-visible" : ""} ${className}` : className;
+  const revealCls = enhance
+    ? `reveal ${delayClass ?? ""} ${visible ? "is-visible" : ""}`
+    : "";
 
   return (
-    <Tag
-      ref={ref}
-      id={id}
-      className={cls}
-      style={delay && enhance ? { transitionDelay: `${delay}ms` } : undefined}
-    >
+    <Tag ref={ref} className={`${revealCls} ${className}`.trim()}>
       {children}
     </Tag>
   );

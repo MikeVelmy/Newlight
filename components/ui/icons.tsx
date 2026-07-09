@@ -1,87 +1,33 @@
 import type { SVGProps } from "react";
 
-// Consistent 1.5px line icon set — no emoji, uniform stroke, drawn to sit on slate.
-const base = {
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.5,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-};
-
-export function IconInterface(p: SVGProps<SVGSVGElement>) {
+export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...base} {...p}>
-      <rect x="3" y="4" width="18" height="16" rx="1.5" />
-      <path d="M3 9h18M8 4v5" />
-      <path d="M6.5 13.5h5M6.5 16h3" />
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12.04 0C5.407 0 .06 5.335.06 11.938c0 2.104.552 4.157 1.601 5.966L0 24l6.284-1.645a11.94 11.94 0 0 0 5.75 1.464h.005c6.633 0 11.98-5.335 11.98-11.939A11.868 11.868 0 0 0 20.463 3.51 11.868 11.868 0 0 0 12.045 0zm5.432 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
     </svg>
   );
 }
 
-export function IconEngineering(p: SVGProps<SVGSVGElement>) {
+export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...base} {...p}>
-      <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" />
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 12.75l6 6 9-13.5" />
     </svg>
   );
 }
 
-export function IconSearch(p: SVGProps<SVGSVGElement>) {
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...base} {...p}>
-      <circle cx="11" cy="11" r="6" />
-      <path d="m20 20-3.2-3.2M9 11h4M11 9v4" />
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
     </svg>
   );
 }
 
-export function IconArrow(p: SVGProps<SVGSVGElement>) {
+export function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...base} {...p}>
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
-export function IconCheck(p: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...base} {...p}>
-      <path d="m4 12 5 5L20 6" />
-    </svg>
-  );
-}
-
-export function IconWhatsApp(p: SVGProps<SVGSVGElement>) {
-  return (
-    <svg width={24} height={24} viewBox="0 0 24 24" fill="currentColor" {...p}>
-      <path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35Z" />
-      <path
-        d="M12 3.5A8.5 8.5 0 0 0 4.6 16.3L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      />
-    </svg>
-  );
-}
-
-export function IconPhone(p: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...base} {...p}>
-      <path d="M4 5c0 8.28 6.72 15 15 15a2 2 0 0 0 2-2v-2.3a1 1 0 0 0-.76-.97l-3.4-.85a1 1 0 0 0-1 .3l-.9 1.1a12 12 0 0 1-5.2-5.2l1.1-.9a1 1 0 0 0 .3-1l-.85-3.4A1 1 0 0 0 8.3 3H6a2 2 0 0 0-2 2Z" />
-    </svg>
-  );
-}
-
-export function IconMail(p: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...base} {...p}>
-      <rect x="3" y="5" width="18" height="14" rx="1.5" />
-      <path d="m3.5 6.5 8.5 6 8.5-6" />
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
     </svg>
   );
 }

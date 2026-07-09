@@ -1,44 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { site } from "@/lib/site";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import "./globals.css";
 
-const display = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Velmure Tech — Premium Web Design & Interface Engineering",
+    default: "Velmure Tech | Websites Built to Be Found on Google",
     template: "%s · Velmure Tech",
   },
   description: site.description,
   keywords: [
-    "web design agency",
-    "web development Ghana",
-    "Next.js development",
-    "premium website design",
-    "interface engineering",
+    "car dealership website",
+    "travel agency website",
+    "local SEO Ghana",
+    "Google Business Profile",
+    "website design Ghana",
     "Velmure Tech",
-    "Core Web Vitals",
-    "SEO web development",
   ],
   authors: [{ name: site.founder }],
   creator: site.founder,
@@ -49,20 +37,13 @@ export const metadata: Metadata = {
     locale: site.locale,
     url: site.url,
     siteName: site.name,
-    title: "Velmure Tech — Premium Web Design & Interface Engineering",
+    title: "Velmure Tech | Websites Built to Be Found on Google",
     description: site.description,
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Velmure Tech — We architect premium digital interfaces.",
-      },
-    ],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Velmure Tech — Premium Web Design & Interface Engineering",
+    title: "Velmure Tech | Websites Built to Be Found on Google",
     description: site.description,
     images: ["/og.png"],
   },
@@ -71,74 +52,52 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  category: "technology",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#334155",
   width: "device-width",
   initialScale: 1,
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${site.url}/#organization`,
+  "@type": "LocalBusiness",
   name: site.name,
   description: site.description,
-  url: site.url,
+  logo: `${site.url}/images/logo-icon.png`,
+  image: `${site.url}/images/logo-icon.png`,
   telephone: site.phoneIntl,
   email: site.email,
-  image: `${site.url}/og.png`,
-  logo: `${site.url}/brand/velmure-mark.png`,
-  priceRange: "$$",
+  url: site.url,
   founder: {
     "@type": "Person",
     name: site.founder,
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Ghana",
   },
   address: {
     "@type": "PostalAddress",
     addressCountry: "GH",
   },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: site.phoneIntl,
-    contactType: "sales",
-    availableLanguage: ["English"],
-  },
-  knowsAbout: [
-    "UI/UX Design",
-    "Next.js Engineering",
-    "React Development",
-    "Technical SEO",
-    "Core Web Vitals Optimization",
-    "Conversion-focused web design",
-  ],
-  serviceType: [
-    "Web Design",
-    "Web Application Development",
-    "Search Engine Optimization",
-  ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="font-sans antialiased">
+    <html lang="en" className={inter.variable}>
+      <body className="bg-surface font-sans text-ink antialiased">
         <script
           type="application/ld+json"
-          // JSON-LD injected into the document per SEO requirements
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-ink focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        <Nav />
         {children}
+        <Footer />
+        <WhatsAppFloat />
       </body>
     </html>
   );
