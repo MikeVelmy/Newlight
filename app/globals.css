@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Velmure Tech — global design system
+   Slate-950 base · cyan-400 accent · engineering blueprint motif
+   ============================================================ */
+
+@layer base {
+  :root {
+    --bg: 2 6 23; /* slate-950 */
+    --panel: 15 23 42; /* slate-900 */
+    --line: 30 41 59; /* slate-800 */
+    --ink: 226 232 240; /* slate-200 */
+    --muted: 148 163 184; /* slate-400 */
+    --accent: 34 211 238; /* cyan-400 */
+    --nav-h: 4.5rem;
+  }
+
+  * {
+    border-color: rgb(var(--line) / 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--ink));
+    font-feature-settings: "ss01", "cv01", "cv03";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Anchor targets clear the fixed header */
+  section[id],
+  header[id] {
+    scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.28);
+    color: #fff;
+  }
+
+  /* Palette-matched focus ring — no default browser outline clash */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent) / 0.8);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Slate scrollbar so it doesn't read as an unfinished default */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--line));
+    border-radius: 999px;
+    border: 2px solid rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(51 65 85);
+  }
+}
+
+@layer components {
+  /* Shared max-width shell */
+  .shell {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Monospace technical label used as section eyebrows + tags */
+  .kicker {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.28em] text-accent;
+  }
+
+  /* Faint blueprint grid — applied to the page backdrop */
+  .blueprint {
+    background-image: linear-gradient(
+        rgb(var(--line) / 0.5) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgb(var(--line) / 0.5) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+  }
+
+  /* Corner registration ticks for "framed" technical panels */
+  .tick::before,
+  .tick::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: rgb(var(--accent) / 0.7);
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 font-mono text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-slate-950 transition-all duration-300 ease-in-out hover:bg-accent-soft hover:shadow-[0_0_30px_-6px_rgb(34_211_238_/0.7)] focus-visible:outline-offset-4;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border border-accent/30 px-6 py-3 font-mono text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-accent transition-all duration-300 ease-in-out hover:border-accent/70 hover:bg-accent/10;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Scroll reveal — kept OUTSIDE @layer so Tailwind never tree-shakes the
+   compound `.reveal.is-visible` selector. Opt-in per block (not every element)
+   to avoid the uniform fade-up tell. The `.reveal` class is only added client
+   side once JS confirms it can animate, so content is fully visible without JS. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
